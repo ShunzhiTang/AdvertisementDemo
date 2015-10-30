@@ -9,6 +9,11 @@
 #import <iAd/iAd.h>
 @interface ViewController ()<ADBannerViewDelegate>
 
+//连接约束
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayout;
+
+
 @end
 
 @implementation ViewController
@@ -33,6 +38,15 @@
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner{
     NSLog(@"广告加载完成");
+    //在加载完成的时间使得广告显示出来 ,改变约束
+    
+    self.bottomLayout.constant = 50;
+    
+    //动画显示广告
+    [UIView animateWithDuration:1.0 animations:^{
+        //强制更新
+        [self.view layoutIfNeeded];
+    }];
     
 }
 
